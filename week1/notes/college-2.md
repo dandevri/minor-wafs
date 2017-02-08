@@ -51,4 +51,3 @@ Gaat alleen om aanbrengen van structuur, het hoeft niet te werken. Welke functie
 * camelCase niet  _ underscore.
 * Let op overbodige white space.
 * Object alleen weten wat relevant is voor Object.
-* 
