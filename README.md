@@ -22,4 +22,8 @@ Assignment 1 - You are looking at it 👀
 
 **5. Base structure SPA**
 
+*Code*
 [Assignment 5](week1/assignment-5)
+
+*Live Version*
+[Liveversion](https://dandevri.github.io/minor-wafs/week1/assignment-5/)
