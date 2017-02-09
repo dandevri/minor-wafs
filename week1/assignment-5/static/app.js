@@ -1,16 +1,18 @@
-(function() {
+(function() {// Iffe
+
+  'use strict'; // Use strict mode
 
 //Object Literal
   var app = {
     init: function() {
       routes.init();
-      sections.init();
+      sections.init(); // Run sections.init() once.
     }
   };
 
-  // Elk object heeft eigen onderdeel ter verantwoordelijkheid.
+  // Every object has his own responsibility inside the app.
   var routes = {
-    init: function() {
+    init: function() { // Init method
       window.addEventListener('hashchange', function() {
           sections.toggle(window.location.hash);
       });
@@ -18,17 +20,17 @@
   };
 
   var sections = {
-    init: function() {
+    init: function() { // Run toggle method once to hide home section.
       this.toggle('#home');
     },
     toggle: function(elementSelector) {
 
-      // Alles op hidden
+      // Loop trough sections, for everyone add class hidden.
       var sectionElements = document.querySelectorAll('section');
       for(var i = 0; i < sectionElements.length; i++) {
         sectionElements[i].classList.add('hidden');
       }
-      // Eentje van hidden af
+      // Remove class hidden
       document.querySelector(elementSelector).classList.remove('hidden');
     }
   };
