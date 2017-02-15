@@ -1,31 +1,19 @@
-// var request = new XMLHttpRequest();
-//
-// request.open('GET', 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC', true);
-//
-// request.addEventListener('load', function() {
-//   var response = JSON.parse(request.responseText);
-//
-//   var plaatjes = response.data;
-//
-//   plaatjes.forEach(function(plaatje) {
-//     document.querySelector('#content').innerHTML += '<img src="' + plaatje.images.downsized.url + '" />';
-//   });
-// });
-//
-// request.send();
-
-
 var app = {
-  init: function(){
-    this.getTrendingImages();
+  init: function() {
+    routes.init();
   },
-  getTrendingImages: function() {
+
+  raceDrivers: function() {
+    this.doRequest('http://ergast.com/api/f1/2016/drivers.json');
+  },
+
+  doRequest: function(url) {
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC', true);
-    request.addEventListener('load', function () {
+    request.open('GET', url, true);
+    request.addEventListener('load', function() {
       var response = JSON.parse(request.response);
-      // console.log(sections.createTrending);
-      sections.createTrending(response);
+      sections.createList(response.MRData.DriverTable.Drivers);
+      console.log(response);
     });
     request.send();
   }
@@ -33,14 +21,19 @@ var app = {
 
 var routes = {
   init: function() {
-
+    routie({
+      'drivers': function() {
+        app.raceDrivers();
+      }
+  });
   }
 };
 
 var sections = {
-  createTrending: function(response) {
-    response.data.forEach(function(plaatje) {
-      document.querySelector('div').innerHTML += '<img src=" '+plaatje.images.downsized.url +'" />';
+  createList: function(dataArray) {
+    document.querySelector('#race-list').innerHTML = '';
+    dataArray.forEach(function(driver) {
+      document.querySelector('#race-list').innerHTML += '<li>' + driver.code + ' | ' + driver.givenName + ' ' +  driver.familyName +'</li>';
     });
   }
 };
