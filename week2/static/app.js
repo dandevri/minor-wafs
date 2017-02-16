@@ -2,11 +2,16 @@ var app = {
   init: function() {
     routes.init();
   },
-
+  
   raceDrivers: function() {
     this.doRequest('http://ergast.com/api/f1/2016/drivers.json');
   },
 
+  /* 
+  1. I would make a new request object with the functionality of doRequest in it. 
+     This way it's cleaner when you do decide to do another ajax request from another part of your code.
+  2. Don't forget to remove that console.log() ;)
+  */
   doRequest: function(url) {
     var request = new XMLHttpRequest();
     request.open('GET', url, true);
