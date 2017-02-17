@@ -22,8 +22,20 @@ a {
   width: 100%;
 }
 
+.dialog a {
+  padding: 0em;
+}
+
+p {
+  line-height: 2;
+}
+
 nav ul li a {
   color: white;
+}
+
+h2 {
+  line-height: 2;
 }
 
 ul,ol {
@@ -105,4 +117,8 @@ ol li {
   height: 50%;
   background-color: white;
   display: block;
+}
+
+.dialog {
+  padding: 2em;
 }

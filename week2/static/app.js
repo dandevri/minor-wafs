@@ -105,7 +105,14 @@ var sections = {
   createDriverOverlay: function(id) {
     var driver = app.driversArray[id];
     document.querySelector('.overlay').innerHTML = `
-      <div>${driver.nationality}</div>
+    <div class="dialog">
+      <p>First name: ${driver.givenName}</p>
+      <p>Last name: ${driver.familyName}</p>
+      <p>Nationality: ${driver.nationality}</p>
+      <p>Date of Birth: ${driver.dateOfBirth}</p>
+      <p>Wikipedia:</p>
+      <a href="${driver.url}">${driver.code}</a>
+    </div>
     `;
 
     this.toggleOverlay();
