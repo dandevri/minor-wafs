@@ -1,7 +1,11 @@
 
 var app = {
+  driversArray: [],
+
   init: function() {
     routes.init();
+
+    document.querySelector('.overlay').addEventListener('click', sections.toggleOverlay);
   },
 
   driverStandings: function() {
@@ -38,9 +42,7 @@ var app = {
     request.addEventListener('load', function() {
       var response = JSON.parse(request.response);
 
-
       callbackFunction(response);
-
 
       console.log(response);
     });
@@ -56,6 +58,9 @@ var routes = {
       },
       'drivers': function() {
         app.raceDrivers();
+      },
+      'driver/:id': function(id) {
+        sections.createDriverOverlay(id);
       },
       'races': function() {
         app.raceSchedule();
@@ -80,19 +85,32 @@ var sections = {
   },
 
   createDriversList: function(dataArray) {
-    // Verberg de andere lijst
+    app.driversArray = dataArray; // save for later use
+    // Hide other list
     document.querySelector('.list').innerHTML = " ";
-    // Vul lijst met data
-    dataArray.forEach(function(driver) {
+    // Fill list with data
+    dataArray.forEach(function(driver, index) {
       // document.querySelector('.list').innerHTML += '<li>' + driver.code + ' | ' + driver.givenName + ' ' +  driver.familyName +'</li>';
       document.querySelector('.list').innerHTML += `
         <li>
-          <h2>${driver.code}</h2>
-          <p>${driver.givenName} ${driver.familyName}</p>
+          <a href="#driver/${index}">
+            <h2>${driver.code}</h2>
+            <p>${driver.givenName} ${driver.familyName}</p>
+          </a>
         </li>
       `;
     });
   },
+
+  createDriverOverlay: function(id) {
+    var driver = app.driversArray[id];
+    document.querySelector('.overlay').innerHTML = `
+      <div>${driver.nationality}</div>
+    `;
+
+    this.toggleOverlay();
+  },
+
   createRaceSchedule: function(dataArray) {
     document.querySelector('.list').innerHTML = " ";
     dataArray.forEach(function(race) {
@@ -101,6 +119,11 @@ var sections = {
         <h2>${race.raceName}</h2>
       </li>`;
     });
+  },
+
+  toggleOverlay: function() {
+    var overlay = document.querySelector('.overlay');
+    overlay.hidden = !overlay.hidden;
   }
 };
 
