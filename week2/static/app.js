@@ -69,7 +69,13 @@ var sections = {
   createStandingsList: function(dataArray) {
     document.querySelector('.list').innerHTML = " ";
     dataArray.forEach(function(standing) {
-      document.querySelector('.list').innerHTML += '<li>' + standing.position + standing.Driver.givenName + standing.Driver.familyName + '</li>';
+      document.querySelector('.list').innerHTML += `
+      <li>
+        <h2>${standing.position}</h2>
+        <h3>${standing.points}</h3>
+        <p>${standing.Driver.givenName}</p>
+        <p>${standing.Driver.familyName}</p>
+      </li>`;
     });
   },
 
@@ -90,7 +96,10 @@ var sections = {
   createRaceSchedule: function(dataArray) {
     document.querySelector('.list').innerHTML = " ";
     dataArray.forEach(function(race) {
-      document.querySelector('.list').innerHTML += '<li>' + race.raceName + '</li>';
+      document.querySelector('.list').innerHTML += `
+      <li>
+        <h2>${race.raceName}</h2>
+      </li>`;
     });
   }
 };
