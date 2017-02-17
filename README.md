@@ -27,3 +27,13 @@ Assignment 1 - You are looking at it 👀
 
 *Live Version*
 [Live version](https://dandevri.github.io/minor-wafs/week1/assignment-5/)
+
+---
+
+## Week 2
+
+*Code*
+[Code on GitHub](week2)
+
+*Live Version*
+[Live version](https://dandevri.github.io/minor-wafs/week2/)

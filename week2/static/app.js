@@ -43,8 +43,6 @@ var app = {
       var response = JSON.parse(request.response);
 
       callbackFunction(response);
-
-      console.log(response);
     });
     request.send();
   }
