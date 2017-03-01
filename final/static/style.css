@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,700i');
 /* Some reset
 -------------------*/
+html {
+  margin: 0;
+}
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +13,8 @@
 
 body {
   background: url('img/background.png') repeat center;
+  margin: 0;
+  padding-top: 7.2em;
 }
 
 a {
@@ -17,7 +22,7 @@ a {
   font-weight: 700;
   font-style: italic;
   text-transform: uppercase;
-  padding: 1em 3em;
+  padding: 1em 0em;
   display: block;
   width: 100%;
 }
@@ -38,9 +43,8 @@ h2 {
   line-height: 2;
 }
 
-ul,ol {
+ol {
   list-style-type: none;
-  padding: 0;
 }
 
 li {
@@ -49,15 +53,8 @@ li {
 }
 
 img {
-  width: 5%;
+  width: 10%;
 }
-
-#title {
-  display: flex;
-  background-color: black;
-  padding: 0em 2em;
-}
-
 
 #race-list {
   display: flex;
@@ -68,10 +65,23 @@ img {
   flex: 1 0 20vw;
 }
 
+section {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+}
+
 h1 {
   background-color: black;
   color: white;
-  padding: 1em;
+  padding: 0.5em;
+}
+
+header {
+  background-color: black;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
 nav {
   background-color: #d82c29;
@@ -79,7 +89,6 @@ nav {
 
 nav ul {
   display: flex;
-  justify-content: space-around;
 }
 
 nav ul li {
@@ -151,4 +160,14 @@ ol li {
 @keyframes spinner  {
   0% { opacity: 0; transform: scale(0.5); }
   50% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.5); } }
+  100% { opacity: 0; transform: scale(0.5); }
+}
+
+.constructor {
+  flex-grow: 1;
+  text-align: right;
+}
+
+li > * {
+  padding-right: 1em;
+}

@@ -37,3 +37,5 @@ Assignment 1 - You are looking at it 👀
 
 *Live Version*
 [Live version](https://dandevri.github.io/minor-wafs/week2/)
+
+## Week 3

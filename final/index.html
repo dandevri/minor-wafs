@@ -7,21 +7,24 @@
     <link href="static/style.css" type="text/css" rel="stylesheet"/>
   </head>
   <body>
-    <div id="title">
-      <img src="static/img/f1logo.svg"/>
-      <h1>Formule 1</h1>
-    </div>
     <div class="preloader preloader-hidden">
       <div class="spinner"></div>
       <p>Please wait..</p>
     </div>
-    <nav>
-      <ul>
-        <li><a href="">Driver standings</a></li>
-        <li><a href="#drivers">Drivers</a></li>
-        <li><a href="#races">Race schedule</a></li>
-      </ul>
-    </nav>
+    <header>
+      <section class="title">
+        <img src="static/img/f1logo.svg"/>
+        <h1>Formule 1</h1>
+      </section>
+      <nav>
+        <ul>
+          <li><a href="#standings">Standings</a></li>
+          <li><a href="#drivers">Drivers</a></li>
+          <li><a href="#races">Race schedule</a></li>
+        </ul>
+      </nav>
+    </header>
+    <ul class="sort"></ul>
     <ol class="list"></ol>
     <div class="overlay" hidden></div>
   </body>
