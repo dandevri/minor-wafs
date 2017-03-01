@@ -120,9 +120,10 @@
         document.querySelector('.list').innerHTML += `
         <li>
           <h2>${standing.position}.</h2>
+          <p> | </p>
           <h3>${standing.points}</h3>
           <p>${standing.Driver.givenName} ${standing.Driver.familyName}</p>
-          <p class="constructor">${standing.Constructors[0].constructorId}</p>
+          <p class="constructor">${standing.Constructors[0].constructorId.replace(/_/g, ' ')}</p>
         </li>`;
       });
     },
