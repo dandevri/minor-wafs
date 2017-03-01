@@ -2,6 +2,7 @@
 
   var app = {
     driversArray: [],
+    standingsArray: [],
 
     init: function() {
       routes.init();
@@ -14,7 +15,8 @@
       this.doRequest(
         'http://ergast.com/api/f1/2016/driverStandings.json',
         function(response) {
-          sections.createStandingsList(response.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+          app.standingsArray = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+          sections.createStandingsList();
         }
       );
     },
@@ -76,11 +78,42 @@
 
   var sections = {
 
-    createStandingsList: function(dataArray) {
+    createStandingsList: function(sort) {
+      var dataArray = app.standingsArray;
+
+      if(sort === 'alfabetic') {
+        dataArray = dataArray.sort(function(a, b) {
+          var nameA = a.Driver.givenName.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.Driver.givenName.toUpperCase(); // ignore upper and lowercase
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+
+          // names must be equal
+          return 0;
+        });
+      } else {
+        dataArray = dataArray.sort(function(a, b) {
+          return Number(a.position) - Number(b.position);
+        });
+      }
+
       document.querySelector('.list').innerHTML = " ";
+      document.querySelector('.sort').innerHTML = " ";
       document.querySelector('.sort').innerHTML += `
-        <li>Normal</li>
-        <li>Alfabetic</li>`;
+        <li class="normal">Normal</li>
+        <li class="alfabetic">Alfabetic</li>`;
+
+      document.querySelector('.normal').addEventListener('click', function() {
+        sections.createStandingsList();
+      });
+      document.querySelector('.alfabetic').addEventListener('click', function() {
+        sections.createStandingsList('alfabetic');
+      });
+
       dataArray.forEach(function(standing) {
         document.querySelector('.list').innerHTML += `
         <li>
@@ -137,6 +170,11 @@
           <h2>${race.raceName}</h2>
         </li>`;
       });
+    },
+
+    toggleSort: function() {
+      var sort = document.querySelector('.list');
+      app.standingsArray.sort;
     },
 
     toggleOverlay: function() {
