@@ -27,6 +27,10 @@ a {
   width: 100%;
 }
 
+button {
+  background-color: blue;
+}
+
 .dialog a {
   padding: 0em;
 }
@@ -168,6 +172,19 @@ ol li {
   text-align: right;
 }
 
-li > * {
+.list li > * {
   padding-right: 1em;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sort button {
+  font-size: 1em;
+  padding: 1em;
+  flex: 1;
+  background: #fff;
+  border: none;
 }

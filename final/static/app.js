@@ -1,4 +1,4 @@
-(function() {// Iffe
+(function() { // Iffe
 
   var app = {
     driversArray: [], // Store driver data
@@ -106,8 +106,8 @@
       document.querySelector('.list').innerHTML = " ";
       document.querySelector('.sort').innerHTML = " ";
       document.querySelector('.sort').innerHTML += `
-        <li class="normal">Normal</li>
-        <li class="alfabetic">Alfabetic</li>`; // Only show these list items if race schedule is active
+        <button type="button" class="normal"> ⬇️ Position</li>
+        <button type="button" class="alfabetic"> 🅰️ Alfabetic</li>`; // Only show these list items if race schedule is active
 
       document.querySelector('.normal').addEventListener('click', function() { // When normal click, normal list
         sections.createStandingsList();
@@ -119,10 +119,9 @@
       dataArray.forEach(function(standing) { // Generate list items
         document.querySelector('.list').innerHTML += `
         <li>
-          <h2>${standing.position}</h2>
+          <h2>${standing.position}.</h2>
           <h3>${standing.points}</h3>
-          <p>${standing.Driver.givenName}</p>
-          <p>${standing.Driver.familyName}</p>
+          <p>${standing.Driver.givenName} ${standing.Driver.familyName}</p>
           <p class="constructor">${standing.Constructors[0].constructorId}</p>
         </li>`;
       });
@@ -168,6 +167,7 @@
       dataArray.forEach(function(race) {
         document.querySelector('.list').innerHTML += `
         <li>
+          <p class=dat>${race.date}</p>
           <h2>${race.raceName}</h2>
         </li>`;
       });
