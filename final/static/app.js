@@ -1,17 +1,17 @@
 (function() {// Iffe
 
   var app = {
-    driversArray: [],
-    standingsArray: [],
+    driversArray: [], // Store driver data
+    standingsArray: [], // Store standing data
 
     init: function() {
       routes.init();
-      document.querySelector('.overlay').addEventListener('click', sections.toggleOverlay);
+      document.querySelector('.overlay').addEventListener('click', sections.toggleOverlay); // Toggle overlay
     }
   };
 
   var request = {
-    getDriverStandings: function() {
+    getDriverStandings: function() {  // Request driver standing .json
       this.doRequest(
         'http://ergast.com/api/f1/2016/driverStandings.json',
         function(response) {
@@ -21,7 +21,7 @@
       );
     },
 
-    getRaceDrivers: function() {
+    getRaceDrivers: function() { // Request race drivers .json
       this.doRequest(
         'http://ergast.com/api/f1/2016/drivers.json', // url
         function(response) { // callbackFunction
@@ -30,7 +30,7 @@
       );
     },
 
-    getRaceSchedule: function() {
+    getRaceSchedule: function() { // Request the race schedule for the upcoming season .json
       this.doRequest(
         'http://ergast.com/api/f1/2017.json',
         function(response) {
@@ -40,7 +40,7 @@
     },
 
 
-    doRequest: function(url, callbackFunction) {
+    doRequest: function(url, callbackFunction) { // XLMHttpRequest with different .json url as parameter
       sections.toggleSpinner();
       var request = new XMLHttpRequest();
       request.open('GET', url, true);
@@ -48,7 +48,7 @@
         var response = JSON.parse(request.response);
 
         callbackFunction(response);
-        sections.toggleSpinner();
+        sections.toggleSpinner(); // Toggle the spinner everytime you do the request
       });
       request.send();
     }
@@ -57,19 +57,19 @@
   var routes = {
     init: function() {
       routie({
-        '': function() {
+        '': function() { // Show standing when first request is fired
           request.getDriverStandings();
         },
-        'standings': function() {
+        'standings': function() { // Same as above but not the browser doesn't reload
           request.getDriverStandings();
         },
-        'drivers': function() {
+        'drivers': function() { // Drivers overview
           request.getRaceDrivers();
         },
-        'driver/:id': function(id) {
+        'driver/:id': function(id) { // Drivers detail
           sections.createDriverOverlay(id);
         },
-        'races': function() {
+        'races': function() { // Race schedule
           request.getRaceSchedule();
         }
     });
@@ -81,10 +81,11 @@
     createStandingsList: function(sort) {
       var dataArray = app.standingsArray;
 
-      if(sort === 'alfabetic') {
+      // MDN example;
+      if(sort === 'alfabetic') { // Sort alfabetic
         dataArray = dataArray.sort(function(a, b) {
-          var nameA = a.Driver.givenName.toUpperCase(); // ignore upper and lowercase
-          var nameB = b.Driver.givenName.toUpperCase(); // ignore upper and lowercase
+          var nameA = a.Driver.givenName.toUpperCase(); // Sorting based on the given name
+          var nameB = b.Driver.givenName.toUpperCase();
           if (nameA < nameB) {
             return -1;
           }
@@ -92,9 +93,10 @@
             return 1;
           }
 
-          // names must be equal
+          // If names are equal
           return 0;
         });
+
       } else {
         dataArray = dataArray.sort(function(a, b) {
           return Number(a.position) - Number(b.position);
@@ -105,16 +107,16 @@
       document.querySelector('.sort').innerHTML = " ";
       document.querySelector('.sort').innerHTML += `
         <li class="normal">Normal</li>
-        <li class="alfabetic">Alfabetic</li>`;
+        <li class="alfabetic">Alfabetic</li>`; // Only show these list items if race schedule is active
 
-      document.querySelector('.normal').addEventListener('click', function() {
+      document.querySelector('.normal').addEventListener('click', function() { // When normal click, normal list
         sections.createStandingsList();
       });
-      document.querySelector('.alfabetic').addEventListener('click', function() {
+      document.querySelector('.alfabetic').addEventListener('click', function() { // When alfabetic click, normal list
         sections.createStandingsList('alfabetic');
       });
 
-      dataArray.forEach(function(standing) {
+      dataArray.forEach(function(standing) { // Generate list items
         document.querySelector('.list').innerHTML += `
         <li>
           <h2>${standing.position}</h2>
@@ -133,7 +135,6 @@
       document.querySelector('.sort').innerHTML = " ";
       // Fill list with data
       dataArray.forEach(function(driver, index) {
-        // document.querySelector('.list').innerHTML += '<li>' + driver.code + ' | ' + driver.givenName + ' ' +  driver.familyName +'</li>';
         document.querySelector('.list').innerHTML += `
           <li>
             <a href="#driver/${index}">
@@ -145,7 +146,7 @@
       });
     },
 
-    createDriverOverlay: function(id) {
+    createDriverOverlay: function(id) { // Create the overlay
       var driver = app.driversArray[id];
       document.querySelector('.overlay').innerHTML = `
       <div class="dialog">
@@ -158,7 +159,7 @@
       </div>
       `;
 
-      this.toggleOverlay();
+      this.toggleOverlay(); // Toggle the overlay
     },
 
     createRaceSchedule: function(dataArray) {
@@ -172,22 +173,17 @@
       });
     },
 
-    toggleSort: function() {
-      var sort = document.querySelector('.list');
-      app.standingsArray.sort;
-    },
-
-    toggleOverlay: function() {
+    toggleOverlay: function() { // Hide the overlay
       var overlay = document.querySelector('.overlay');
       overlay.hidden = !overlay.hidden;
     },
 
-    toggleSpinner: function() {
+    toggleSpinner: function() { // Toggle the spinner
       var spinner = document.querySelector('.preloader');
       spinner.classList.toggle('preloader-hidden');
     }
   };
 
-app.init();
+app.init(); // Iniatilze the app
 
 })();
