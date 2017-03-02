@@ -46,4 +46,4 @@ Assignment 1 - You are looking at it 👀
 
 ## Week 3
 
-[Final assignment and documentation](https://dandevri.github.io/minor-wafs/week2/)
+[Final assignment and documentation](https://github.com/dandevri/minor-wafs/tree/master/final)
