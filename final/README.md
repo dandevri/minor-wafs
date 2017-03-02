@@ -3,7 +3,7 @@
 
 ![GitHub Banner](GitHub_Banner.png)
 
-[Live version](https://dandevri.github.io/minor-wafs/final/) | [Code](https://github.com/dandevri/minor-wafs/tree/master/final)
+[Live version](https://dandevri.github.io/minor-wafs/final/) | [Code](https://github.com/dandevri/minor-wafs/tree/master/final/static)
 
 ## Introduction
 Hello outsider,
@@ -15,7 +15,6 @@ This **Formula 1 Dashboard SPA** shows you the the latest statistics about:
 
 The upcoming Formula 1 season (2017) is right around the corner. To give race fanatics and Max Verstappen fans insight in the upcoming season is why I build this app. Through the menu you can navigate to the different sections with every page showing different statistics. You can even sort race drivers by name.
 
-## Flow
 
 ## Terminology:
 * Driver: The person that drives the Formula 1 car.
@@ -33,3 +32,13 @@ The upcoming Formula 1 season (2017) is right around the corner. To give race fa
 - [ ] Refactor the API request
 - [ ] Make the list remove prettier
 - [ ] Maybe replace innerHTML with insertAdjacentHTML
+
+## Flow
+
+**Actor Diagram**
+![Actor diagram](minor-wafs-actor-diagram.svg)
+
+---
+
+**User Flow**
+![User flow](minor-wafs-user-flow.svg)
