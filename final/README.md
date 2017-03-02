@@ -36,7 +36,7 @@ The upcoming Formula 1 season (2017) is right around the corner. To give race fa
 ## Flow
 
 **Actor Diagram**
-![Actor diagram](minor-wafs-actor-diagram.png)
+![Actor diagram](minor-wafs-actor.png)
 
 ---
 
