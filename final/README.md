@@ -41,7 +41,7 @@ The upcoming Formula 1 season (2017) is right around the corner. To give race fa
 ---
 
 **User Flow**
-![User flow](minor-wafs-user-flow.png)
+![User flow](minor-wafs-flow.png)
 
 ## License
 The content of this project itself is licensed under the Creative Commons Attribution 3.0 license, and the underlying source code used to format and display that content is licensed under the MIT license.
