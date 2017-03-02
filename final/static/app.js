@@ -107,7 +107,7 @@
       document.querySelector('.sort').innerHTML = " ";
       document.querySelector('.sort').innerHTML += `
         <button type="button" class="normal"> ⬇️ Position</li>
-        <button type="button" class="alfabetic"> 🅰️ Alfabetic</li>`; // Only show these list items if race schedule is active
+        <button type="button" class="alfabetic">🅰️ Alfabetic</li>`; // Only show these list items if race schedule is active
 
       document.querySelector('.normal').addEventListener('click', function() { // When normal click, normal list
         sections.createStandingsList();
@@ -168,8 +168,8 @@
       dataArray.forEach(function(race) {
         document.querySelector('.list').innerHTML += `
         <li>
-          <p class=dat>${race.date}</p>
           <h2>${race.raceName}</h2>
+          <p class=date>${race.date}</p>
         </li>`;
       });
     },
