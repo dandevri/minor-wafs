@@ -1,0 +1,33 @@
+{
+  "name": "minor-wafs",
+  "version": "1.0.0",
+  "description": "Code &amp; documentation for the Minor Class: Web App From Scratch. 🎉",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "xo": "^0.18.2"
+  },
+  "xo": {
+  "semicolon": true,
+  "space": true,
+  "esnext": false,
+  "env": [
+    "node",
+    "browser"
+  ]
+},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dandevri/minor-wafs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dandevri/minor-wafs/issues"
+  },
+  "homepage": "https://github.com/dandevri/minor-wafs#readme"
+}
