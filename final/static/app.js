@@ -13,7 +13,7 @@
   var request = {
     getDriverStandings: function () {  // Request driver standing .json
       this.doRequest(
-        'http://ergast.com/api/f1/2016/driverStandings.json',
+        'http://ergast.com/api/f1/2017/driverStandings.json',
         function (response) {
           app.standingsArray = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
           sections.createStandingsList();
@@ -79,10 +79,15 @@
 
     createStandingsList: function (sort) {
       var dataArray = app.standingsArray;
-
+      console.log(app.standingsArray);
+      // Filter data only to top 10 drivers
+      var topStandingsArray = dataArray.filter(function (driver) {
+        // Convert string to number
+        return Number(driver.positionText) <= 10;
+      });
       // MDN example;
       if (sort === 'alfabetic') { // Sort alfabetic
-        dataArray = dataArray.sort(function (a, b) {
+        dataArray = topStandingsArray.sort(function (a, b) {
           var nameA = a.Driver.givenName.toUpperCase(); // Sorting based on the given name
           var nameB = b.Driver.givenName.toUpperCase();
           if (nameA < nameB) {
@@ -114,7 +119,7 @@
         sections.createStandingsList('alfabetic');
       });
 
-      dataArray.forEach(function (standing) { // Generate list items
+      topStandingsArray.forEach(function (standing) { // Generate list items
         document.querySelector('.list').innerHTML += `
         <li>
           <h2>${standing.position}.</h2>
