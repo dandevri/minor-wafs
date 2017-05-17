@@ -110,14 +110,24 @@
       document.querySelector('.sort').innerHTML = '';
       document.querySelector('.sort').innerHTML += `
         <button type="button" class="normal"> ⬇️ Position</li>
-        <button type="button" class="alfabetic">🅰️ Alfabetic</li>`; // Only show these list items if race schedule is active
+        <button type="button" class="alfabetic">🅰️ Alfabetic</li>`;
+        // Only show these list items if race schedule is active
 
-      document.querySelector('.normal').addEventListener('click', function () { // When normal click, normal list
+      document.querySelector('.normal').addEventListener('click', function () {
+        // When normal click, normal list
         sections.createStandingsList();
       });
-      document.querySelector('.alfabetic').addEventListener('click', function () { // When alfabetic click, normal list
+      document.querySelector('.alfabetic').addEventListener('click', function () {
+        // When alfabetic click, normal list
         sections.createStandingsList('alfabetic');
       });
+
+      // Total points this season using .reduce
+      var totalPoints = dataArray.reduce(function (acc, currentItem) {
+        return acc + Number(currentItem.points);
+      }, 0);
+
+      document.querySelector('.total').innerHTML = totalPoints;
 
       topStandingsArray.forEach(function (standing) { // Generate list items
         document.querySelector('.list').innerHTML += `
