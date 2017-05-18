@@ -79,13 +79,11 @@
 
     createStandingsList: function (sort) {
       var dataArray = app.standingsArray;
-      console.log(app.standingsArray);
       // Filter data only to top 10 drivers
       var topStandingsArray = dataArray.filter(function (driver) {
         // Convert string to number
         return Number(driver.positionText) <= 10;
       });
-      console.log(topStandingsArray);
       // MDN example;
       if (sort === 'alfabetic') { // Sort alfabetic
         dataArray = topStandingsArray.sort(function (a, b) {
