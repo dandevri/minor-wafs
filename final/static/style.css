@@ -196,3 +196,10 @@ ul {
   font-size: 0.8em;
   padd
 }
+
+.total {
+  text-align: center;
+  background-color: #d82c29;
+  color: white;
+  font-weight: 700;
+}

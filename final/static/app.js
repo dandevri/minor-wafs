@@ -13,7 +13,7 @@
   var request = {
     getDriverStandings: function () {  // Request driver standing .json
       this.doRequest(
-        'http://ergast.com/api/f1/2016/driverStandings.json',
+        'http://ergast.com/api/f1/2017/driverStandings.json',
         function (response) {
           app.standingsArray = response.MRData.StandingsTable.StandingsLists[0].DriverStandings;
           sections.createStandingsList();
@@ -79,10 +79,14 @@
 
     createStandingsList: function (sort) {
       var dataArray = app.standingsArray;
-
+      // Filter data only to top 10 drivers
+      var topStandingsArray = dataArray.filter(function (driver) {
+        // Convert string to number
+        return Number(driver.positionText) <= 10;
+      });
       // MDN example;
       if (sort === 'alfabetic') { // Sort alfabetic
-        dataArray = dataArray.sort(function (a, b) {
+        dataArray = topStandingsArray.sort(function (a, b) {
           var nameA = a.Driver.givenName.toUpperCase(); // Sorting based on the given name
           var nameB = b.Driver.givenName.toUpperCase();
           if (nameA < nameB) {
@@ -101,20 +105,35 @@
         });
       }
 
-      document.querySelector('.list').innerHTML = '';
-      document.querySelector('.sort').innerHTML = '';
+      sections.removeList();
       document.querySelector('.sort').innerHTML += `
         <button type="button" class="normal"> ⬇️ Position</li>
-        <button type="button" class="alfabetic">🅰️ Alfabetic</li>`; // Only show these list items if race schedule is active
+        <button type="button" class="alfabetic">🅰️ Alfabetic</li>`;
+        // Only show these list items if race schedule is active
 
-      document.querySelector('.normal').addEventListener('click', function () { // When normal click, normal list
+      document.querySelector('.normal').addEventListener('click', function () {
+        // When normal click, normal list
         sections.createStandingsList();
       });
-      document.querySelector('.alfabetic').addEventListener('click', function () { // When alfabetic click, normal list
+      document.querySelector('.alfabetic').addEventListener('click', function () {
+        // When alfabetic click, normal list
         sections.createStandingsList('alfabetic');
       });
 
-      dataArray.forEach(function (standing) { // Generate list items
+      // Total points this season using array.prototype methods
+      var totalPoints =
+      topStandingsArray.map(function (driver) {
+        return Number(driver.points);
+      }).filter(function (points) {
+        return points > 0;
+      }).reduce(function (total, points) {
+        return total + points;
+      });
+
+      document.querySelector('.total').innerHTML =
+      `Total points this season: ` + totalPoints;
+
+      topStandingsArray.forEach(function (standing) { // Generate list items
         document.querySelector('.list').innerHTML += `
         <li>
           <h2>${standing.position}.</h2>
@@ -129,8 +148,7 @@
     createDriversList: function (dataArray) {
       app.driversArray = dataArray; // Save for later use
       // Hide other list
-      document.querySelector('.list').innerHTML = '';
-      document.querySelector('.sort').innerHTML = '';
+      sections.removeList();
       // Fill list with data
       dataArray.forEach(function (driver, index) {
         document.querySelector('.list').innerHTML += `
@@ -161,8 +179,8 @@
     },
 
     createRaceSchedule: function (dataArray) {
-      document.querySelector('.list').innerHTML = '';
-      document.querySelector('.sort').innerHTML = '';
+      // Hide the other lists
+      sections.removeList();
       dataArray.forEach(function (race) {
         document.querySelector('.list').innerHTML += `
         <li>
@@ -180,6 +198,12 @@
     toggleSpinner: function () { // Toggle the spinner
       var spinner = document.querySelector('.preloader');
       spinner.classList.toggle('preloader-hidden');
+    },
+
+    removeList: function () { // Remove the list items
+      document.querySelector('.sort').innerHTML = '';
+      document.querySelector('.list').innerHTML = '';
+      document.querySelector('.total').innerHTML = '';
     }
   };
 
