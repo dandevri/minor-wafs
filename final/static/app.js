@@ -85,6 +85,7 @@
         // Convert string to number
         return Number(driver.positionText) <= 10;
       });
+      console.log(topStandingsArray);
       // MDN example;
       if (sort === 'alfabetic') { // Sort alfabetic
         dataArray = topStandingsArray.sort(function (a, b) {
@@ -122,12 +123,18 @@
         sections.createStandingsList('alfabetic');
       });
 
-      // Total points this season using .reduce
-      var totalPoints = dataArray.reduce(function (acc, currentItem) {
-        return acc + Number(currentItem.points);
-      }, 0);
+      // Total points this season using array.prototype methods
+      var totalPoints =
+      topStandingsArray.map(function (driver) {
+        return Number(driver.points);
+      }).filter(function (points) {
+        return points > 0;
+      }).reduce(function (total, points) {
+        return total + points;
+      });
 
-      document.querySelector('.total').innerHTML = totalPoints;
+      document.querySelector('.total').innerHTML =
+      `Total points this season: ` + totalPoints;
 
       topStandingsArray.forEach(function (standing) { // Generate list items
         document.querySelector('.list').innerHTML += `
