@@ -107,8 +107,7 @@
         });
       }
 
-      document.querySelector('.list').innerHTML = '';
-      document.querySelector('.sort').innerHTML = '';
+      sections.removeList();
       document.querySelector('.sort').innerHTML += `
         <button type="button" class="normal"> ⬇️ Position</li>
         <button type="button" class="alfabetic">🅰️ Alfabetic</li>`;
@@ -151,8 +150,7 @@
     createDriversList: function (dataArray) {
       app.driversArray = dataArray; // Save for later use
       // Hide other list
-      document.querySelector('.list').innerHTML = '';
-      document.querySelector('.sort').innerHTML = '';
+      sections.removeList();
       // Fill list with data
       dataArray.forEach(function (driver, index) {
         document.querySelector('.list').innerHTML += `
@@ -183,8 +181,8 @@
     },
 
     createRaceSchedule: function (dataArray) {
-      document.querySelector('.list').innerHTML = '';
-      document.querySelector('.sort').innerHTML = '';
+      // Hide the other lists
+      sections.removeList();
       dataArray.forEach(function (race) {
         document.querySelector('.list').innerHTML += `
         <li>
@@ -202,6 +200,12 @@
     toggleSpinner: function () { // Toggle the spinner
       var spinner = document.querySelector('.preloader');
       spinner.classList.toggle('preloader-hidden');
+    },
+
+    removeList: function () { // Remove the list items
+      document.querySelector('.sort').innerHTML = '';
+      document.querySelector('.list').innerHTML = '';
+      document.querySelector('.total').innerHTML = '';
     }
   };
 
