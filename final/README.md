@@ -3,7 +3,7 @@
 
 ![GitHub Banner](GitHub_Banner.png)
 
-[Live version](http://minor-wafs.surge.sh/final/) | [Code](https://github.com/dandevri/minor-wafs/tree/master/final/static)
+[Live version](https://final-ihvszupnny.now.sh/) | [Code](https://github.com/dandevri/minor-wafs/tree/master/final/static)
 
 ## Introduction
 Hello outsider,
